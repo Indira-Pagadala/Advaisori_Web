@@ -1,0 +1,10 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#081c34"/>
+  <g transform="translate(6, 6) rotate(45) scale(0.6)">
+    <pattern id="dotPattern" patternUnits="userSpaceOnUse" width="4" height="4">
+      <circle cx="2" cy="2" r="1" fill="#e11d48"/>
+    </pattern>
+    <rect width="20" height="20" fill="url(#dotPattern)"/>
+  </g>
+</svg>

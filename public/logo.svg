@@ -1,0 +1,13 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 500 500">
+  <rect width="500" height="500" fill="transparent"/>
+  <g transform="translate(80, 80) rotate(45)">
+    <pattern id="dotPattern" patternUnits="userSpaceOnUse" width="15" height="15">
+      <circle cx="7.5" cy="7.5" r="3.5" fill="#e11d48"/>
+    </pattern>
+    <rect width="300" height="300" fill="url(#dotPattern)"/>
+  </g>
+  <text x="250" y="280" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#ffffff" text-anchor="middle">
+    Adv<tspan font-style="italic" fill="#e11d48">ai</tspan>sori
+  </text>
+</svg>
