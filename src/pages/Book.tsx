@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { Calendar, Clock, Users, Phone, Mail, MessageSquare, CheckCircle2, ArrowRight } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
-import { toast } from '../components/ui/use-toast';
+import { toast } from '../hooks/use-toast';
 
 const Book = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +9,7 @@ const Book = () => {
     email: '',
     phone: '',
     company: '',
+    industry: '',
     employees: '',
     message: '',
     preferredDate: '',
@@ -26,19 +26,52 @@ const Book = () => {
     });
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Consultation Request Received",
-        description: "We'll contact you shortly to confirm your consultation details.",
-      });
-      setIsSubmitting(false);
-      setFormStep(3);
-    }, 1500);
+    if (formStep === 1) {
+      // Move to next step if first step is valid
+      if (formData.name && formData.email && formData.phone && formData.company && formData.industry && formData.employees) {
+        nextStep();
+        return;
+      }
+      return;
+    }
+    
+    // Only submit if we're on step 2 and all data is valid
+    if (formStep === 2 && isFormValid()) {
+      setIsSubmitting(true);
+      
+      try {
+        const response = await fetch('http://localhost:3000/api/submit-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to submit form');
+        }
+
+        toast({
+          title: "Consultation Request Received",
+          description: "We'll contact you shortly to confirm your consultation details.",
+        });
+        setFormStep(3);
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        toast({
+          title: "Error",
+          description: error.message || "Failed to submit the form. Please try again later.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
   };
   
   const nextStep = () => setFormStep(formStep + 1);
@@ -46,7 +79,7 @@ const Book = () => {
   
   const isFormValid = () => {
     if (formStep === 1) {
-      return formData.name && formData.email && formData.phone && formData.company && formData.employees;
+      return formData.name && formData.email && formData.phone && formData.company &&formData.industry && formData.employees;
     }
     return formData.message && formData.preferredDate && formData.preferredTime;
   };
@@ -67,7 +100,7 @@ const Book = () => {
                 Start Your <span className="text-secondary">AI Journey</span> Today
               </h1>
               <p className="text-xl text-muted-foreground">
-                Schedule a free, no-obligation consultation with our AI specialists to discuss your business needs and potential solutions.
+                Schedule a free, no-obligation consultation with our AI consultants to discuss your business needs and potential solutions.
               </p>
             </div>
           </ScrollReveal>
@@ -98,7 +131,7 @@ const Book = () => {
                     {
                       icon: <CheckCircle2 size={24} className="text-secondary" />,
                       title: "Solution Exploration",
-                      description: "Our specialists will outline potential AI solutions tailored to your specific needs and industry context."
+                      description: "Our team will outline potential AI solutions tailored to your specific needs and industry context."
                     },
                     {
                       icon: <Users size={24} className="text-secondary" />,
@@ -214,6 +247,19 @@ const Book = () => {
                                 className="w-full bg-card border border-border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary/30"
                               />
                             </div>
+
+                            <div>
+                              <label htmlFor="industry" className="block text-sm font-medium mb-2">Business Sector or Industry*</label>
+                              <input
+                                type="text"
+                                id="industry"
+                                name="industry"
+                                value={formData.industry}
+                                onChange={handleChange}
+                                required
+                                className="w-full bg-card border border-border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary/30"
+                              />
+                            </div>
                             
                             <div>
                               <label htmlFor="employees" className="block text-sm font-medium mb-2">Company Size*</label>
@@ -295,7 +341,7 @@ const Book = () => {
                           </div>
                         )}
                         
-                        <div className="mt-8 flex justify-between">
+                        <div className="flex justify-between mt-6">
                           {formStep > 1 && (
                             <button
                               type="button"
@@ -307,25 +353,20 @@ const Book = () => {
                             </button>
                           )}
                           
-                          {formStep < 2 ? (
-                            <button
-                              type="button"
-                              onClick={nextStep}
-                              className="btn-primary ml-auto"
-                              disabled={!isFormValid()}
-                            >
-                              Next
-                            </button>
-                          ) : (
-                            <button
-                              type="submit"
-                              className="btn-primary ml-auto flex items-center gap-2"
-                              disabled={!isFormValid() || isSubmitting}
-                            >
-                              {isSubmitting ? "Submitting..." : "Book Consultation"}
-                              {!isSubmitting && <ArrowRight size={16} />}
-                            </button>
-                          )}
+                          <button
+                            type="submit"
+                            className={`btn-primary flex items-center gap-2 ${formStep === 1 ? '' : 'ml-auto'}`}
+                            disabled={!isFormValid() || isSubmitting}
+                          >
+                            {formStep === 1 ? (
+                              'Next'
+                            ) : (
+                              <>
+                                {isSubmitting ? "Submitting..." : "Book Consultation"}
+                                {!isSubmitting && <ArrowRight size={16} />}
+                              </>
+                            )}
+                          </button>
                         </div>
                       </form>
                     </>
@@ -340,7 +381,7 @@ const Book = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Call us directly</p>
-                        <p className="font-medium">+1 (555) 123-4567</p>
+                        <p className="font-medium">+1 (203) 715-1513</p>
                       </div>
                     </div>
                     
@@ -350,7 +391,7 @@ const Book = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Email us</p>
-                        <p className="font-medium">contact@advaisori.com</p>
+                        <p className="font-medium">teamadvaisori@gmail.com</p>
                       </div>
                     </div>
                   </div>
@@ -385,7 +426,7 @@ const Book = () => {
               },
               {
                 question: "Who will I be speaking with?",
-                answer: "You'll meet with one of our senior AI consultants who specializes in your industry or the challenges you're looking to address."
+                answer: "You'll meet with one of our AI consultants who specializes in understanding the challenges you're looking to address."
               },
               {
                 question: "What should I prepare for the consultation?",

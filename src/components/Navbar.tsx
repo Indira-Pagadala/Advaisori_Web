@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import Logo from './Logo';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +9,10 @@ const Navbar = () => {
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+  
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   
   useEffect(() => {
     const handleScroll = () => {
@@ -39,11 +43,9 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="relative h-10 w-10">
-            <div className="absolute inset-0 dot-pattern opacity-80 rotate-45"></div>
-          </div>
-          <span className="text-2xl font-playfair text-white tracking-wider">
+        <Link to="/" className="flex items-center -mt-1" onClick={scrollToTop}>
+          <Logo size={68} />
+          <span className="text-2xl font-playfair text-white tracking-wider -ml-1">
             Adv<span className="text-secondary italic">ai</span>sori
           </span>
         </Link>

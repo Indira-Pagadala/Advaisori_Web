@@ -1,18 +1,20 @@
-
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
+import Logo from './Logo';
 
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="bg-primary py-12 border-t border-white/10">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="relative h-10 w-10">
-                <div className="absolute inset-0 dot-pattern opacity-80 rotate-45"></div>
-              </div>
-              <span className="text-2xl font-playfair text-white tracking-wider">
+            <Link to="/" className="flex items-center mb-4" onClick={scrollToTop}>
+              <Logo size={68} />
+              <span className="text-2xl font-playfair text-white tracking-wider -ml-1">
                 Adv<span className="text-secondary italic">ai</span>sori
               </span>
             </Link>
@@ -20,7 +22,7 @@ const Footer = () => {
               Transforming businesses through AI-powered solutions and strategic consulting.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-secondary transition-colors">
+              <a href="https://www.linkedin.com/company/advaisori" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-secondary transition-colors">
                 <Linkedin size={20} />
               </a>
               <a href="#" className="text-muted-foreground hover:text-secondary transition-colors">
@@ -47,7 +49,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/about" className="text-muted-foreground hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/book" className="text-muted-foreground hover:text-white transition-colors">Book Consultation</Link></li>
-              <li><a href="#" className="text-muted-foreground hover:text-white transition-colors">Careers</a></li>
+              {/*<li><a href="#" className="text-muted-foreground hover:text-white transition-colors">Careers</a></li> */}
               <li><a href="#" className="text-muted-foreground hover:text-white transition-colors">Privacy Policy</a></li>
             </ul>
           </div>
@@ -57,15 +59,15 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Mail size={16} className="text-secondary" />
-                <span>contact@advaisori.com</span>
+                <span>teamadvaisori@gmail.com</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone size={16} className="text-secondary" />
-                <span>+1 (555) 123-4567</span>
+                <span>+1 (203) 715-1513</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <MapPin size={16} className="text-secondary" />
-                <span>123 Innovation Ave, San Francisco, CA</span>
+                <span>Miami, Florida, USA</span>
               </li>
             </ul>
           </div>

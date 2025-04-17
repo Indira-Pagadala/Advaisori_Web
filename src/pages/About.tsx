@@ -29,7 +29,8 @@ const About = () => {
       {/* Our Story Section */}
       <section className="section bg-primary relative">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/*<div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">*/}
+          <div className="max-w-4xl mx-auto">
             <ScrollReveal>
               <div>
                 <span className="inline-block bg-secondary/20 text-secondary px-4 py-1 rounded-full text-sm font-medium mb-4">
@@ -37,18 +38,18 @@ const About = () => {
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Bridging the AI Gap for Growing Businesses</h2>
                 <p className="text-muted-foreground mb-6">
-                  Founded in 2020, Advaisori emerged from a vision to democratize access to AI technology. We recognized that while large enterprises were rapidly adopting AI solutions, small and medium-sized businesses were being left behind due to perceived complexity and cost barriers.
+                  Founded in 2024, Advaisori emerged from a vision to democratize access to AI technology. We recognized that while large enterprises were rapidly adopting AI solutions, small and medium-sized businesses were being left behind due to perceived complexity and cost barriers.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  Our team of AI specialists, business strategists, and industry experts came together with a shared mission: to create practical, affordable, and impactful AI solutions specifically designed for the unique challenges faced by SMBs.
+                  Our team of AI and automation specialists and business strategists came together with a shared mission: to create practical, affordable, and impactful AI solutions specifically designed for the unique challenges faced by SMBs.
                 </p>
                 <p className="text-muted-foreground">
-                  Today, we've helped hundreds of businesses across various industries implement AI strategies that drive real business outcomes—from increased operational efficiency to enhanced customer experiences and accelerated growth.
+                  Today, we deal with businesses across various industries implement AI strategies that drive real business outcomes—from increased operational efficiency to enhanced customer experiences and accelerated growth.
                 </p>
               </div>
             </ScrollReveal>
             
-            <ScrollReveal delay={200}>
+            {/*<ScrollReveal delay={200}>
               <div className="relative">
                 <div className="absolute -left-6 -top-6 w-full h-full border-2 border-secondary/30 rounded-2xl"></div>
                 <div className="glassmorphism rounded-2xl p-8">
@@ -72,7 +73,7 @@ const About = () => {
                   </div>
                 </div>
               </div>
-            </ScrollReveal>
+            </ScrollReveal> */}
           </div>
         </div>
       </section>
@@ -189,7 +190,7 @@ const About = () => {
       </section>
       
       {/* Team Section */}
-      <section className="diagonal-section relative overflow-hidden">
+      {/*<section className="diagonal-section relative overflow-hidden">
         <div className="container-custom relative z-10">
           <ScrollReveal>
             <div className="text-center mb-16">
@@ -198,7 +199,7 @@ const About = () => {
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet Our Leadership Team</h2>
               <p className="text-muted-foreground max-w-3xl mx-auto">
-                Our diverse team of AI specialists, business strategists, and industry experts are dedicated to your success.
+                Our diverse team of AI specialists, business strategists, and consultants are dedicated to your success.
               </p>
             </div>
           </ScrollReveal>
@@ -206,8 +207,8 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Alexandra Chen",
-                role: "CEO & Founder",
+                name: "Vaibhav Saduneni",
+                role: "Founder",
                 bio: "Former AI Research Lead at Tech Giant with 15+ years experience in machine learning and business strategy."
               },
               {
@@ -249,7 +250,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section>*/}
     </div>
   );
 };

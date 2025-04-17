@@ -1,9 +1,8 @@
-
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, BrainCircuit, Cog, Database, PieChart, BarChart4 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
-import { toast } from '../components/ui/use-toast';
+import { toast } from '../hooks/use-toast';
 
 const Index = () => {
   useEffect(() => {
@@ -217,11 +216,11 @@ const Index = () => {
               </div>
             </div>
             
-            <ScrollReveal delay={300}>
+            {/*<ScrollReveal delay={300}>
               <div className="relative">
                 <div className="absolute -left-6 -top-6 w-full h-full border-2 border-secondary/30 rounded-2xl"></div>
                 <div className="bg-card rounded-2xl p-8 relative overflow-hidden">
-                  <div className="flex items-center justify-between mb-6">
+                  {/*<div className="flex items-center justify-between mb-6">
                     <h3 className="text-xl font-semibold">Client Results</h3>
                     <span className="text-secondary text-sm font-medium">Average Impact</span>
                   </div>
@@ -243,11 +242,11 @@ const Index = () => {
                         ></div>
                       </div>
                     </div>
-                  ))}
+                  ))} */}
                   
-                  <div className="mt-8 p-4 bg-primary rounded-lg">
+                  {/*<div className="mt-8 p-4 bg-primary rounded-lg">
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="font-medium">Implementation Timeline</h4>
+                      <h3 className="text-xl font-semibold">Implementation Timeline</h3>
                       <span className="text-secondary text-sm">8-12 weeks</span>
                     </div>
                     <div className="space-y-2">
@@ -262,11 +261,11 @@ const Index = () => {
                           <span>{phase.weeks} weeks</span>
                         </div>
                       ))}
-                    </div>
+                    </div> 
                   </div>
                 </div>
               </div>
-            </ScrollReveal>
+            </ScrollReveal>*/}
           </div>
         </div>
       </section>
