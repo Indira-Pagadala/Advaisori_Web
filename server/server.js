@@ -12,10 +12,11 @@ app.use(express.json());
 
 // MySQL Connection
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  host:process.env.DB_HOST,
+  port:process.env.DB_PORT,
+  user:process.env.DB_USER,
+  password:process.env.DB_PASSWORD,
+  database:process.env.DB_NAME
 });
 
 db.connect((err) => {
@@ -38,7 +39,7 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({ version: 'v4', auth });
 
 // Form submission endpoint
-app.post('/api/submit-form', async (req, res) => {
+app.post('/submit', async (req, res) => {
   const formData = req.body;
   
   try {
