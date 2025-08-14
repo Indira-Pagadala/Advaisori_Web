@@ -1,158 +1,187 @@
-
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronRight, BrainCircuit, Cog, Database, BarChart4, PieChart, FileCode, ArrowRight, Filter, Search } from 'lucide-react';
-import ScrollReveal from '../components/ScrollReveal';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ChevronRight,
+  BrainCircuit,
+  Cog,
+  Database,
+  BarChart4,
+  PieChart,
+  FileCode,
+  ArrowRight,
+  Filter,
+  Search,
+} from "lucide-react";
+import ScrollReveal from "../components/ScrollReveal";
 
 const services = [
   {
-    id: 'strategy',
-    category: 'Strategy',
-    title: 'AI Strategy & Implementation',
+    id: "strategy",
+    category: "Strategy",
+    title: "AI Strategy & Implementation",
     icon: <BrainCircuit size={40} className="text-secondary" />,
-    description: 'Develop a comprehensive AI roadmap tailored to your business goals, industry, and current technological capabilities.',
+    description:
+      "Develop a comprehensive AI roadmap tailored to your business goals, industry, and current technological capabilities.",
     features: [
-      'AI Readiness Assessment',
-      'Technology Selection & Roadmapping',
-      'Integration Planning',
-      'ROI Projection & Measurement',
-      'Change Management Support'
+      "AI Readiness Assessment",
+      "Technology Selection & Roadmapping",
+      "Integration Planning",
+      "ROI Projection & Measurement",
+      "Change Management Support",
     ],
     useCases: [
-      'Digital Transformation Initiatives',
-      'Legacy System Modernization',
-      'Market Expansion Planning',
-      'Competitive Advantage Development'
-    ]
+      "Digital Transformation Initiatives",
+      "Legacy System Modernization",
+      "Market Expansion Planning",
+      "Competitive Advantage Development",
+    ],
   },
   {
-    id: 'automation',
-    category: 'Automation',
-    title: 'Business Process Automation',
+    id: "automation",
+    category: "Automation",
+    title: "Business Process Automation",
     icon: <Cog size={40} className="text-secondary" />,
-    description: 'Identify and automate repetitive tasks and workflows to increase operational efficiency and reduce human error.',
+    description:
+      "Identify and automate repetitive tasks and workflows to increase operational efficiency and reduce human error.",
     features: [
-      'Process Mapping & Analysis',
-      'Custom Automation Development',
-      'Integration with Existing Systems',
-      'Performance Monitoring',
-      'Continuous Optimization'
+      "Process Mapping & Analysis",
+      "Custom Automation Development",
+      "Integration with Existing Systems",
+      "Performance Monitoring",
+      "Continuous Optimization",
     ],
     useCases: [
-      'Document Processing & Management',
-      'Customer Service Automation',
-      'Supply Chain Optimization',
-      'Human Resources Workflows'
-    ]
+      "Document Processing & Management",
+      "Customer Service Automation",
+      "Supply Chain Optimization",
+      "Human Resources Workflows",
+    ],
   },
   {
-    id: 'analytics',
-    category: 'Analytics',
-    title: 'Data Analytics & Insights',
+    id: "analytics",
+    category: "Analytics",
+    title: "Data Analytics & Insights",
     icon: <Database size={40} className="text-secondary" />,
-    description: 'Transform your raw data into actionable insights that drive strategic decision-making and business growth.',
+    description:
+      "Transform your raw data into actionable insights that drive strategic decision-making and business growth.",
     features: [
-      'Data Collection & Integration',
-      'Custom Dashboard Development',
-      'Pattern Recognition',
-      'Insight Generation',
-      'Recommendation Engines'
+      "Data Collection & Integration",
+      "Custom Dashboard Development",
+      "Pattern Recognition",
+      "Insight Generation",
+      "Recommendation Engines",
     ],
     useCases: [
-      'Customer Behavior Analysis',
-      'Market Trend Identification',
-      'Operational Efficiency Measurement',
-      'Performance Benchmarking'
-    ]
+      "Customer Behavior Analysis",
+      "Market Trend Identification",
+      "Operational Efficiency Measurement",
+      "Performance Benchmarking",
+    ],
   },
   {
-    id: 'predictive',
-    category: 'Analytics',
-    title: 'Predictive Analytics',
+    id: "predictive",
+    category: "Analytics",
+    title: "Predictive Analytics",
     icon: <PieChart size={40} className="text-secondary" />,
-    description: 'Leverage historical data and AI to forecast future trends, outcomes, and behaviors with remarkable accuracy.',
+    description:
+      "Leverage historical data and AI to forecast future trends, outcomes, and behaviors with remarkable accuracy.",
     features: [
-      'Predictive Model Development',
-      'Risk Assessment',
-      'Scenario Planning',
-      'Anomaly Detection',
-      'Forecasting Systems'
+      "Predictive Model Development",
+      "Risk Assessment",
+      "Scenario Planning",
+      "Anomaly Detection",
+      "Forecasting Systems",
     ],
     useCases: [
-      'Demand Forecasting',
-      'Preventive Maintenance',
-      'Fraud Detection',
-      'Customer Churn Prediction'
-    ]
+      "Demand Forecasting",
+      "Preventive Maintenance",
+      "Fraud Detection",
+      "Customer Churn Prediction",
+    ],
   },
   {
-    id: 'custom',
-    category: 'Development',
-    title: 'Custom AI Solutions',
+    id: "custom",
+    category: "Development",
+    title: "Custom AI Solutions",
     icon: <FileCode size={40} className="text-secondary" />,
-    description: 'Bespoke AI applications designed and developed specifically for your unique business challenges and opportunities.',
+    description:
+      "Bespoke AI applications designed and developed specifically for your unique business challenges and opportunities.",
     features: [
-      'Custom Algorithm Development',
-      'Proprietary Solution Design',
-      'Specialized Integration',
-      'Unique Use Case Implementation',
-      'Intellectual Property Development'
+      "Custom Algorithm Development",
+      "Proprietary Solution Design",
+      "Specialized Integration",
+      "Unique Use Case Implementation",
+      "Intellectual Property Development",
     ],
     useCases: [
-      'Specialized Industry Applications',
-      'Competitive Differentiation',
-      'Complex Problem Solving',
-      'Innovation Initiatives'
-    ]
+      "Specialized Industry Applications",
+      "Competitive Differentiation",
+      "Complex Problem Solving",
+      "Innovation Initiatives",
+    ],
   },
   {
-    id: 'performance',
-    category: 'Analytics',
-    title: 'Performance Analytics',
+    id: "performance",
+    category: "Analytics",
+    title: "Performance Analytics",
     icon: <BarChart4 size={40} className="text-secondary" />,
-    description: 'Comprehensive measurement and analysis of your business performance, with AI-powered recommendations for improvement.',
+    description:
+      "Comprehensive measurement and analysis of your business performance, with AI-powered recommendations for improvement.",
     features: [
-      'KPI Development & Tracking',
-      'Performance Dashboard Creation',
-      'Benchmarking',
-      'Improvement Recommendations',
-      'Continuous Monitoring'
+      "KPI Development & Tracking",
+      "Performance Dashboard Creation",
+      "Benchmarking",
+      "Improvement Recommendations",
+      "Continuous Monitoring",
     ],
     useCases: [
-      'Executive Decision Support',
-      'Team Performance Optimization',
-      'Project Outcome Measurement',
-      'Business Health Assessment'
-    ]
-  }
+      "Executive Decision Support",
+      "Team Performance Optimization",
+      "Project Outcome Measurement",
+      "Business Health Assessment",
+    ],
+  },
 ];
 
-const categories = ['All', 'Strategy', 'Automation', 'Analytics', 'Development'];
+const categories = [
+  "All",
+  "Strategy",
+  "Automation",
+  "Analytics",
+  "Development",
+];
 
 const Services = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredServices, setFilteredServices] = useState(services);
-  
+
   useEffect(() => {
     let filtered = services;
-    
+
     // Filter by category
-    if (activeCategory !== 'All') {
-      filtered = filtered.filter(service => service.category === activeCategory);
+    if (activeCategory !== "All") {
+      filtered = filtered.filter(
+        (service) => service.category === activeCategory
+      );
     }
-    
+
     // Filter by search term
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(service => 
-        service.title.toLowerCase().includes(term) || 
-        service.description.toLowerCase().includes(term) ||
-        service.features.some(feature => feature.toLowerCase().includes(term)) ||
-        service.useCases.some(useCase => useCase.toLowerCase().includes(term))
+      filtered = filtered.filter(
+        (service) =>
+          service.title.toLowerCase().includes(term) ||
+          service.description.toLowerCase().includes(term) ||
+          service.features.some((feature) =>
+            feature.toLowerCase().includes(term)
+          ) ||
+          service.useCases.some((useCase) =>
+            useCase.toLowerCase().includes(term)
+          )
       );
     }
-    
+
     setFilteredServices(filtered);
   }, [activeCategory, searchTerm]);
 
@@ -161,7 +190,7 @@ const Services = () => {
       {/* Hero Section */}
       <section className="hero-gradient py-32 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full dot-pattern opacity-10 rotate-45"></div>
-        
+
         <div className="container-custom relative z-10">
           <ScrollReveal>
             <div className="max-w-3xl mx-auto text-center">
@@ -169,16 +198,19 @@ const Services = () => {
                 Our Services
               </span>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Transforming Businesses with <span className="text-secondary">AI Solutions</span>
+                Transforming Businesses with{" "}
+                <span className="text-secondary">AI Solutions</span>
               </h1>
               <p className="text-xl text-muted-foreground">
-                Discover our comprehensive suite of AI consulting services designed to enhance your business operations and strategic decision-making.
+                Discover our comprehensive suite of AI consulting services
+                designed to enhance your business operations and strategic
+                decision-making.
               </p>
             </div>
           </ScrollReveal>
         </div>
       </section>
-      
+
       {/* Services Filtering Section */}
       <section className="py-12 bg-primary">
         <div className="container-custom">
@@ -188,24 +220,27 @@ const Services = () => {
                 <Filter size={18} className="text-muted-foreground" />
                 <span className="text-muted-foreground">Filter by:</span>
               </div>
-              
+
               {categories.map((category, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveCategory(category)}
                   className={`px-4 py-2 rounded-md transition-colors ${
-                    activeCategory === category 
-                      ? 'bg-secondary text-white' 
-                      : 'bg-card text-muted-foreground hover:bg-card/80'
+                    activeCategory === category
+                      ? "bg-secondary text-white"
+                      : "bg-card text-muted-foreground hover:bg-card/80"
                   }`}
                 >
                   {category}
                 </button>
               ))}
             </div>
-            
+
             <div className="relative flex items-center">
-              <Search size={18} className="absolute left-3 text-muted-foreground" />
+              <Search
+                size={18}
+                className="absolute left-3 text-muted-foreground"
+              />
               <input
                 type="text"
                 placeholder="Search services..."
@@ -215,12 +250,17 @@ const Services = () => {
               />
             </div>
           </div>
-          
+
           {filteredServices.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg mb-4">No services found matching your criteria.</p>
-              <button 
-                onClick={() => { setActiveCategory('All'); setSearchTerm(''); }}
+              <p className="text-muted-foreground text-lg mb-4">
+                No services found matching your criteria.
+              </p>
+              <button
+                onClick={() => {
+                  setActiveCategory("All");
+                  setSearchTerm("");
+                }}
                 className="btn-secondary"
               >
                 Reset Filters
@@ -237,43 +277,62 @@ const Services = () => {
                           <span className="inline-block bg-secondary/20 text-secondary px-3 py-1 rounded-full text-xs font-medium mb-3">
                             {service.category}
                           </span>
-                          <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+                          <h3 className="text-2xl font-bold mb-4">
+                            {service.title}
+                          </h3>
                         </div>
-                        <div className="flex-shrink-0">
-                          {service.icon}
-                        </div>
+                        <div className="flex-shrink-0">{service.icon}</div>
                       </div>
-                      
-                      <p className="text-muted-foreground mb-6">{service.description}</p>
-                      
+
+                      <p className="text-muted-foreground mb-6">
+                        {service.description}
+                      </p>
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
-                          <h4 className="text-lg font-semibold mb-3">Key Features</h4>
+                          <h4 className="text-lg font-semibold mb-3">
+                            Key Features
+                          </h4>
                           <ul className="space-y-2">
                             {service.features.map((feature, i) => (
                               <li key={i} className="flex items-start gap-2">
-                                <ChevronRight size={18} className="text-secondary flex-shrink-0 mt-1" />
-                                <span className="text-muted-foreground">{feature}</span>
+                                <ChevronRight
+                                  size={18}
+                                  className="text-secondary flex-shrink-0 mt-1"
+                                />
+                                <span className="text-muted-foreground">
+                                  {feature}
+                                </span>
                               </li>
                             ))}
                           </ul>
                         </div>
-                        
+
                         <div>
-                          <h4 className="text-lg font-semibold mb-3">Common Use Cases</h4>
+                          <h4 className="text-lg font-semibold mb-3">
+                            Common Use Cases
+                          </h4>
                           <ul className="space-y-2">
                             {service.useCases.map((useCase, i) => (
                               <li key={i} className="flex items-start gap-2">
-                                <ChevronRight size={18} className="text-secondary flex-shrink-0 mt-1" />
-                                <span className="text-muted-foreground">{useCase}</span>
+                                <ChevronRight
+                                  size={18}
+                                  className="text-secondary flex-shrink-0 mt-1"
+                                />
+                                <span className="text-muted-foreground">
+                                  {useCase}
+                                </span>
                               </li>
                             ))}
                           </ul>
                         </div>
                       </div>
-                      
+
                       <div className="mt-auto">
-                        <Link to="/book" className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 transition-colors">
+                        <Link
+                          to="/book"
+                          className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 transition-colors"
+                        >
                           Discuss Your Needs
                           <ArrowRight size={16} />
                         </Link>
@@ -286,7 +345,7 @@ const Services = () => {
           )}
         </div>
       </section>
-      
+
       {/* Process Section */}
       <section className="diagonal-section relative overflow-hidden">
         <div className="container-custom relative z-10">
@@ -295,62 +354,77 @@ const Services = () => {
               <span className="inline-block bg-secondary/20 text-secondary px-4 py-1 rounded-full text-sm font-medium mb-4">
                 Our Process
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">How We Deliver Results</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                How We Deliver Results
+              </h2>
               <p className="text-muted-foreground max-w-3xl mx-auto">
-                Our proven methodology ensures that we deliver effective AI solutions that align with your business goals.
+                Our proven methodology ensures that we deliver effective AI
+                solutions that align with your business goals.
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="relative">
             {/* Process Steps */}
             <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-muted hidden md:block"></div>
-            
+
             {[
-              { 
-                title: "Discovery", 
-                description: "We begin by understanding your business, challenges, goals, and current technological landscape through in-depth consultations.",
-                position: "left"
+              {
+                title: "Discovery",
+                description:
+                  "We begin by understanding your business, challenges, goals, and current technological landscape through in-depth consultations.",
+                position: "left",
               },
-              { 
-                title: "Assessment", 
-                description: "Our experts analyze your data infrastructure, processes, and AI readiness to identify the most impactful opportunities.",
-                position: "right"
+              {
+                title: "Assessment",
+                description:
+                  "Our experts analyze your data infrastructure, processes, and AI readiness to identify the most impactful opportunities.",
+                position: "right",
               },
-              { 
-                title: "Strategy", 
-                description: "We develop a comprehensive implementation plan tailored to your specific needs, resources, and desired outcomes.",
-                position: "left"
+              {
+                title: "Strategy",
+                description:
+                  "We develop a comprehensive implementation plan tailored to your specific needs, resources, and desired outcomes.",
+                position: "left",
               },
-              { 
-                title: "Implementation", 
-                description: "Our technical team brings the strategy to life, building and integrating AI solutions into your existing business operations.",
-                position: "right"
+              {
+                title: "Implementation",
+                description:
+                  "Our technical team brings the strategy to life, building and integrating AI solutions into your existing business operations.",
+                position: "right",
               },
-              { 
-                title: "Training", 
-                description: "We ensure your team has the knowledge and skills needed to effectively use and manage the new AI capabilities.",
-                position: "left"
+              {
+                title: "Training",
+                description:
+                  "We ensure your team has the knowledge and skills needed to effectively use and manage the new AI capabilities.",
+                position: "left",
               },
-              { 
-                title: "Optimization", 
-                description: "We continuously monitor performance, gather feedback, and refine the solution to maximize its impact and ROI.",
-                position: "right"
-              }
+              {
+                title: "Optimization",
+                description:
+                  "We continuously monitor performance, gather feedback, and refine the solution to maximize its impact and ROI.",
+                position: "right",
+              },
             ].map((step, index) => (
               <ScrollReveal key={index} delay={index * 100}>
-                <div className={`relative mb-12 md:mb-24 flex ${step.position === 'right' ? 'md:justify-end' : 'md:justify-start'}`}>
-                  <div className="md:w-5/12 bg-card glassmorphism rounded-xl p-6 relative">
-                    {/* Circle node on timeline */}
-                    <div className="absolute top-1/2 -translate-y-1/2 hidden md:block
-                      ${step.position === 'right' ? 'left-0 -translate-x-1/2' : 'right-0 translate-x-1/2'}
-                    ">
-                      <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-white"></div>
-                      </div>
+                <div
+                  className={`relative mb-12 md:mb-24 flex ${
+                    step.position === "right"
+                      ? "md:justify-end"
+                      : "md:justify-start"
+                  }`}
+                >
+                  {/* Circle node on timeline - positioned as bullet */}
+                  <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 hidden md:block z-10">
+                    <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-white"></div>
                     </div>
-                    
-                    <span className="text-secondary text-sm font-medium mb-2 block">Step {index + 1}</span>
+                  </div>
+
+                  <div className="md:w-5/12 bg-card glassmorphism rounded-xl p-6 relative">
+                    <span className="text-secondary text-sm font-medium mb-2 block">
+                      Step {index + 1}
+                    </span>
                     <h3 className="text-xl font-bold mb-3">{step.title}</h3>
                     <p className="text-muted-foreground">{step.description}</p>
                   </div>
@@ -360,7 +434,7 @@ const Services = () => {
           </div>
         </div>
       </section>
-      
+
       {/* CTA Section */}
       <section className="section bg-primary">
         <div className="container-custom">
@@ -369,11 +443,18 @@ const Services = () => {
               <span className="inline-block bg-secondary/20 text-secondary px-4 py-1 rounded-full text-sm font-medium mb-4">
                 Ready to Get Started?
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Book Your Free Consultation Today</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Book Your Free Consultation Today
+              </h2>
               <p className="text-muted-foreground mb-8">
-                Schedule a no-obligation consultation with our AI specialists to discuss your business needs and explore how our services can help you achieve your goals.
+                Schedule a no-obligation consultation with our AI specialists to
+                discuss your business needs and explore how our services can
+                help you achieve your goals.
               </p>
-              <Link to="/book" className="btn-primary inline-flex items-center gap-2">
+              <Link
+                to="/book"
+                className="btn-primary inline-flex items-center gap-2"
+              >
                 Book Consultation
                 <ArrowRight size={16} />
               </Link>
